@@ -5,34 +5,65 @@ import Styles from "../../styles/productividad.module.css";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "chartjs-adapter-date-fns";
 // import dayjs from "dayjs";
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
-const rows = [
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-  createData(17284938276, "Carlos Medina", 40309, "100%", 4.0),
-];
+const data = {
+  labels: ["Caja 01", "Caja 02", "Caja 03", "Caja 04", "Caja 05", "Caja 06"],
+  datasets: [
+    {
+      label: "Registros por aja",
+      backgroundColor: "rgba(75,192,192,1)",
+      borderColor: "rgba(0,0,0,1)",
+      borderWidth: 2,
+      padding: 10,
+      data: [30922, 17280, 19428, 12232, 16284, 12456],
+    },
+  ],
+};
+const options = {
+  responsive: true,
+  animation: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scales: {
+    y: {
+      min: 0,
+      max: 50000,
+      ticks: { color: "rgba(0, 220, 195)", paddingLeft: 5,},
+    },
+    x: {
+      ticks: { color: "rgba(0, 220, 195)" },
+    },
+  },
+};
 
 const Productividad = () => {
   const [selectedDate1, setSelectedDate1] = useState(null);
@@ -46,10 +77,6 @@ const Productividad = () => {
     setSelectedDate2(date);
   };
 
-  const exportToExcel = () => {
-    // Aquí iría la lógica para exportar el reporte a Excel
-    // Puedes usar librerías como exceljs o xlsx para generar el archivo Excel
-  };
   const [input, setInput] = useState({
     usuario: "",
     contraseña: "",
@@ -114,46 +141,22 @@ const Productividad = () => {
           </section>
           <section className={Styles.table}>
             <div className={Styles.headerTable}>
-              <h2>Cajeros</h2>
+              <h2>Registros por Caja</h2>
               <div className={Styles.opcionSelect}>
                 <Select
-                   options={optiones}
-                   placeholder="Selecciona la sede..."
-                   value={input.options}
-                   onChange={(selectedOption) => setInput({ ...input, options: selectedOption })}
+                  options={optiones}
+                  placeholder="Selecciona la sede..."
+                  value={input.options}
+                  onChange={(selectedOption) =>
+                    setInput({ ...input, options: selectedOption })
+                  }
                 />
               </div>
             </div>
             <div className={Styles.tableList}>
-              <TableContainer component={Paper}>
-                <Table  aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="center">Cedula</TableCell>
-                      <TableCell align="center">Calories</TableCell>
-                      <TableCell align="center">Fat&nbsp;(g)</TableCell>
-                      <TableCell align="center">Carbs&nbsp;(g)</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.name}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell align="center" component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="center">{row.calories}</TableCell>
-                        <TableCell align="center">{row.fat}</TableCell>
-                        <TableCell align="center">{row.carbs}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <section className={Styles.chart}>
+                <Bar data={data} options={options} />
+              </section>
             </div>
           </section>
         </div>

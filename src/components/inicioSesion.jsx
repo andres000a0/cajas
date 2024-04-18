@@ -139,7 +139,7 @@ const Inicio = () => {
         </button>
         <p>
           ¿Aún no tienes cuenta?{" "}
-          <b onClick={() => navigate("/")}>Regístrate!</b>
+          <b onClick={() => navigate("/Registro")}>Regístrate!</b>
         </p>
       </form>
       {mensaje && <p>{mensaje}</p>}

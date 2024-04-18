@@ -9,11 +9,15 @@
     font-family: "Poppins", sans-serif;
     outline: none;
 }
+.dashboardContainer{
+  display: flex;
+}
 .logo {
     display: flex;
     padding: 20px;
     align-items: center;
     width: 300px;
+    cursor: pointer;
 }
 .logo .img {
     width: 100px;

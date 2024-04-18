@@ -1,0 +1,66 @@
+.dashboardIndex {
+    display: flex;
+    justify-content: center; 
+}
+
+.dashboard {
+    width: 100vw; 
+    max-width: auto;  
+    height: auto; 
+    padding: 10px;
+    background-color: aliceblue;
+    margin: 20px auto; 
+    border-radius: 10px;
+    box-shadow: 3px 3px 8px -4px rgba(0, 0, 0, 0.75);
+}
+
+.graficos-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.cards {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+}
+.cards .cardItem {
+    display: flex;
+    border-top: 4px solid#27374d;
+}
+
+.cardItem{
+    flex: 0 0 calc(25.13% - 20px); 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 8px -4px rgba(0, 0, 0, 0.75);
+    transition: width 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.cardItem h3 {
+    margin-bottom: 10px;
+}
+.cardContent {
+    margin-top: 40px; /* Mueve el contenido al fondo de la tarjeta */
+  }
+.cardItem:hover {
+    width: 56px;
+    transform: scale(1.015);
+    background: linear-gradient(to right, #d6e3eb, #e1e7eb);
+}
+
+.bar-item {
+    width: 50%; 
+    max-width: 800px; 
+    height: 320px;
+    background-color: #27374d;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 3px 3px 8px -4px rgba(0, 0, 0, 0.75);
+}
