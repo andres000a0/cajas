@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 import Component from "../dashboard.jsx";
-import Styles from "../../styles/compensacion.module.css";
+import "../../styles/compensacion.scss";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -77,15 +77,15 @@ const Compensacion = () => {
   ];
 
   return (
-    <div className={Styles.dashboardContent}>
+    <div className="dashboardContent">
       <Component />
-      <div className={Styles.dashboard}>
+      <div className="dashboard">
         <div>
           <h2>Compensacion</h2>
         </div>
-        <div className={Styles.cards}>
-          <section className={Styles.cardContainer}>
-            <div className={Styles.calendar}>
+        <div className="cards">
+          <section className="cardContainer">
+            <div className="calendar">
               <LocalizationProvider dateAdapter={AdapterDayjs} locale="es">
                 <DatePicker
                   label="Selecciona una fecha"
@@ -95,9 +95,9 @@ const Compensacion = () => {
                 />
               </LocalizationProvider>
             </div>
-            <div className={Styles.calendar}>
+            <div className="calendar">
               <LocalizationProvider
-                className={Styles.calendar}
+                className="calendar"
                 dateAdapter={AdapterDayjs}
                 locale="es"
               >
@@ -113,21 +113,23 @@ const Compensacion = () => {
             <button>Buscar</button>
             <button onClick={exportToExcel}>Exportar a Excel</button>
           </section>
-          <section className={Styles.table}>
-            <div className={Styles.headerTable}>
+          <section className="table">
+            <div className="headerTable">
               <h2>Cajeros</h2>
-              <div className={Styles.opcionSelect}>
+              <div className="opcionSelect">
                 <Select
-                   options={optiones}
-                   placeholder="Selecciona la sede..."
-                   value={input.options}
-                   onChange={(selectedOption) => setInput({ ...input, options: selectedOption })}
+                  options={optiones}
+                  placeholder="Selecciona la sede..."
+                  value={input.options}
+                  onChange={(selectedOption) =>
+                    setInput({ ...input, options: selectedOption })
+                  }
                 />
               </div>
             </div>
-            <div className={Styles.tableList}>
+            <div className="tableList">
               <TableContainer component={Paper}>
-                <Table  aria-label="simple table">
+                <Table aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell align="center">Cedula</TableCell>
